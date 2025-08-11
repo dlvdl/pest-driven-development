@@ -10,13 +10,18 @@ class CourseFactory extends Factory
 {
     protected $model = Course::class;
 
-    public function definition()
+    public function definition(): array
     {
         return [
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
         ];
+    }
+
+    public function released(Carbon $date = null): self
+    {
+        return $this->state(
+            fn($attributes) => ['released_at' => $date ?? Carbon::now()]
+        );
     }
 }
