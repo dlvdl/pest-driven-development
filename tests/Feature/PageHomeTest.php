@@ -2,6 +2,7 @@
 
 use App\Models\Course;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Carbon;
 use function Pest\Laravel\get;
 
 uses(RefreshDatabase::class);
@@ -9,17 +10,20 @@ uses(RefreshDatabase::class);
 it('shows courses overview', function () {
     Course::factory()->create([
         'title' => 'Course A',
-        'description' => 'Description Course A'
+        'description' => 'Description Course A',
+        'released_at' => Carbon::now()
     ]);
 
     Course::factory()->create([
         'title' => 'Course B',
-        'description' => 'Description Course B'
+        'description' => 'Description Course B',
+        'released_at' => Carbon::now()
     ]);
 
     Course::factory()->create([
         'title' => 'Course C',
-        'description' => 'Description Course C'
+        'description' => 'Description Course C',
+        'released_at' => Carbon::now()
     ]);
 
     get(route('home'))
@@ -34,9 +38,42 @@ it('shows courses overview', function () {
 });
 
 it('shows only released courses', function () {
-    
+    Course::factory()->create([
+        'title' => 'Course A',
+        'description' => 'Description Course A',
+        'released_at' => Carbon::yesterday()
+    ]);
+
+    Course::factory()->create([
+        'title' => 'Course B',
+    ]);
+
+    get(route('home'))
+        ->assertSeeText([
+            'Course A',
+            'Description Course A',
+        ])
+        ->assertDontSeeText([
+            'Course B',
+        ])
+    ;
 });
 
 it('shows courses by release date', function () {
-    
+    Course::factory()->create([
+        'title' => 'Course A',
+        'description' => 'Description Course A',
+        'released_at' => Carbon::yesterday()
+    ]);
+
+    Course::factory()->create([
+        'title' => 'Course B',
+        'released_at' => Carbon::now()
+    ]);
+
+    get(route('home'))
+        ->assertSeeTextInOrder([
+            'Course B',
+            'Course A',
+        ]);
 });
