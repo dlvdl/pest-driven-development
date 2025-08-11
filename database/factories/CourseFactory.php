@@ -15,6 +15,7 @@ class CourseFactory extends Factory
         return [
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
+            'slug' => $this->faker->slug,
         ];
     }
 
