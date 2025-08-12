@@ -21,7 +21,7 @@ class CourseFactory extends Factory
                 $this->faker->paragraph,
                 $this->faker->paragraph,
                 $this->faker->paragraph,
-            ]
+            ],
         ];
     }
 

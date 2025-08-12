@@ -10,3 +10,5 @@
 </ul>
 
 <img src="{{ $course->image }}" alt="{{ $course->title }}">
+
+<p>{{ count($course->videos) }} videos</p>
