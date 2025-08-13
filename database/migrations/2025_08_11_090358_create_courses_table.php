@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->string('slug')->unique();
             $table->string('tagline');
-            $table->string('image')->nullable();
+            $table->string('image_name')->nullable();
             $table->json('learnings')->nullable();
             $table->string('title');
             $table->text('description');

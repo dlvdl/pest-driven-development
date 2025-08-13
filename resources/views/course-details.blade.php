@@ -9,6 +9,6 @@
     @endforeach
 </ul>
 
-<img src="{{ $course->image }}" alt="{{ $course->title }}">
+<img src="{{ asset("images/$course->image_name") }}" alt="{{ $course->title }}">
 
 <p>{{ count($course->videos) }} videos</p>

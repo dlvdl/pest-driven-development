@@ -17,6 +17,7 @@ class CourseFactory extends Factory
             'description' => $this->faker->paragraph,
             'slug' => $this->faker->slug,
             'tagline' => $this->faker->sentence,
+            'image_name' => 'image.png',
             'learnings' => [
                 $this->faker->paragraph,
                 $this->faker->paragraph,
