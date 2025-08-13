@@ -5,7 +5,7 @@ use App\Models\Course;
 use function Pest\Laravel\get;
 
 it('gives back successful response for home page', function () {
-    get(route('home'))
+    get(route('pages.home'))
         ->assertOk();
 });
 
@@ -14,6 +14,6 @@ it('gives back successful response for course details page', function () {
         ->released()
         ->create();
 
-    get(route('course.details', $course))
+    get(route('pages.course-details', $course))
         ->assertOk();
 });

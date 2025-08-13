@@ -11,4 +11,4 @@
 
 <img src="{{ asset("images/$course->image_name") }}" alt="{{ $course->title }}">
 
-<p>{{ count($course->videos) }} videos</p>
+<p>{{ $course->videos_count }} videos</p>
