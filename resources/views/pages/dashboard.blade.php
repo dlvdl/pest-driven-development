@@ -13,9 +13,10 @@
         </div>
         <div class="relative h-full flex-1 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
             <ul>
-                @foreach($purchasedCourses as $course)
+                @foreach($purchasedCourses as $purchasedCourse)
                     <li>
-                        <p>{{ $course->title }}</p>
+                        <p>{{ $purchasedCourse->title }}</p>
+                        <a href="{{ route('page.course-videos', $purchasedCourse) }}">Watch videos</a>
                     </li>
                 @endforeach
             </ul>
