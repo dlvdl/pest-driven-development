@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PageCourseController;
+use App\Http\Controllers\PageDashboardController;
 use App\Http\Controllers\PageHomeController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
@@ -9,8 +10,8 @@ Route::get('/', PageHomeController::class)->name('pages.home');
 
 Route::get('/courses/{course:slug}', PageCourseController::class)->name('pages.course-details');
 
-Route::view('dashboard', 'pages.dashboard')
-    ->middleware(['auth', 'verified'])
+Route::middleware(['auth', 'verified'])
+    ->get('dashboard', PageDashboardController::class)
     ->name('dashboard');
 
 Route::middleware(['auth'])->group(function () {
