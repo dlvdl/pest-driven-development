@@ -5,7 +5,6 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Support\Carbon;
 
-use function Pest\Laravel\actingAs;
 use function Pest\Laravel\get;
 
 test('cannot be accessed by guest', function () {
@@ -24,8 +23,7 @@ test('lists purchased courses', function () {
         ))
         ->create();
 
-    actingAs($user);
-
+    loginAsUser($user);
     get(route('dashboard'))
         ->assertOk()
         ->assertSeeText([
@@ -52,8 +50,7 @@ test('does not list other courses', function () {
 
     $courseWithoutUser = Course::factory()->create();
 
-    actingAs($user);
-
+    loginAsUser($user);
     get(route('dashboard'))
         ->assertOk()
         ->assertSeeText([
@@ -75,8 +72,7 @@ test('shows latest purchased courses', function () {
     $user->courses()->attach($firstPurchasedCourse->id, ['created_at' => Carbon::yesterday()]);
     $user->courses()->attach($lastPurchasedCourse->id, ['created_at' => Carbon::now()]);
 
-    actingAs($user);
-
+    loginAsUser($user);
     get(route('dashboard'))
         ->assertOk()
         ->assertSeeTextInOrder([
@@ -90,8 +86,7 @@ test('includes link to products videos', function () {
         ->has(Course::factory())
         ->create();
 
-    actingAs($user);
-
+    loginAsUser($user);
     get(route('dashboard'))
         ->assertOk()
         ->assertSeeText('Watch videos')

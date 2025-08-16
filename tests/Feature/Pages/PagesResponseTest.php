@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Course;
-use App\Models\User;
 
 use function Pest\Laravel\get;
 
@@ -20,9 +19,7 @@ it('gives back successful response for course details page', function () {
 });
 
 it('gives back successful response for dashboard page', function () {
-    $user = User::factory()->create();
-
-    $this->actingAs($user);
+    loginAsUser();
 
     get(route('dashboard'))
         ->assertOk();
