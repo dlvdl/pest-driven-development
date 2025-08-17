@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Course;
+use App\Models\Video;
 
 use function Pest\Laravel\get;
 
@@ -28,4 +29,15 @@ it('gives back successful response for dashboard page', function () {
 it('does not find starter kit registration page', function () {
     get('register')
         ->assertNotFound();
+});
+
+it('gives back successful response for videos page', function () {
+    $course = Course::factory()
+        ->has(Video::factory())
+        ->create();
+
+    loginAsUser();
+
+    get(route('page.course-videos', $course))
+        ->assertOk();
 });

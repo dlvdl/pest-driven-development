@@ -13,7 +13,7 @@ Route::get('/courses/{course:slug}', PageCourseController::class)->name('pages.c
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/dashboard', PageDashboardController::class)->name('dashboard');
-    Route::get('/videos/{course:slug}', PageVideosController::class)->name('page.course-videos');
+    Route::get('/videos/{course:slug}/{video:slug?}', PageVideosController::class)->name('page.course-videos');
 
     Route::redirect('/settings', 'settings/profile');
 
