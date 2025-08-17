@@ -92,3 +92,12 @@ test('includes link to products videos', function () {
         ->assertSeeText('Watch videos')
         ->assertSee(route('page.course-videos', Course::first()));
 });
+
+test('includes logout', function () {
+    loginAsUser();
+
+    get(route('dashboard'))
+        ->assertOk()
+        ->assertSeeText('Log Out')
+        ->assertSee(route('logout'));
+});
