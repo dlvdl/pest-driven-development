@@ -3,8 +3,8 @@
 use App\Livewire\VideoPlayer;
 use App\Models\Course;
 use App\Models\Video;
-
 use Illuminate\Database\Eloquent\Factories\Sequence;
+
 use function Pest\Laravel\get;
 
 it('cannot be accessed with guest', function () {
@@ -56,7 +56,7 @@ it('shows provided course video', function () {
     loginAsUser();
     get(route('page.course-videos', [
         'course' => $course,
-        'video' => $course->videos()->orderByDesc('id')->first()
+        'video' => $course->videos()->orderByDesc('id')->first(),
     ]))
         ->assertOk()
         ->assertSeeText(
