@@ -15,7 +15,9 @@ it('cannot be accessed with guest', function () {
 });
 
 it('includes video player', function () {
-    $course = Course::factory()->create();
+    $course = Course::factory()
+        ->has(Video::factory())
+        ->create();
 
     loginAsUser();
     get(route('page.course-videos', $course))
