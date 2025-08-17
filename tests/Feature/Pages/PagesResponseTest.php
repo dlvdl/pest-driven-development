@@ -24,3 +24,8 @@ it('gives back successful response for dashboard page', function () {
     get(route('dashboard'))
         ->assertOk();
 });
+
+it('does not find starter kit registration page', function () {
+    get('register')
+        ->assertNotFound();
+});

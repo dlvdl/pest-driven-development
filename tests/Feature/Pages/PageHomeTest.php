@@ -50,10 +50,10 @@ it('includes login if not logged in', function () {
     get(route('pages.home'))
         ->assertOk()
         ->assertSeeText([
-            'Login'
+            'Login',
         ])
         ->assertDontSeeText([
-            'Log out'
+            'Log out',
         ])
         ->assertSee(route('login'));
 });
@@ -64,10 +64,10 @@ it('includes logout if logged in', function () {
     get(route('pages.home'))
         ->assertOk()
         ->assertSeeText([
-            'Log out'
+            'Log out',
         ])
         ->assertDontSeeText([
-            'Log in'
+            'Log in',
         ])
         ->assertSee(route('logout'));
 });
