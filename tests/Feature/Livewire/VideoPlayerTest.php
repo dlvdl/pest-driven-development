@@ -9,11 +9,12 @@ test('show details for given video', function () {
         ->has(Video::factory())
         ->create();
 
-    Livewire::test(VideoPlayer::class, ['video' => $course->videos->first()])
+    $video = $course->videos->first();
+    Livewire::test(VideoPlayer::class, ['video' => $video])
         ->assertSeeText([
-            $course->videos->first()->title,
-            $course->videos->first()->description,
-            $course->videos->first()->duration.'min',
+            $video->title,
+            $video->description,
+            "{$video->duration_in_min}min",
         ]);
 });
 
@@ -22,9 +23,9 @@ test('shows video', function () {
         ->has(Video::factory())
         ->create();
 
-    Livewire::test(VideoPlayer::class, ['video' => $course->videos->first()])
-        ->assertSee(
-            '<iframe src="https://player.vimeo.com/video/'.$course->videos->first()->vimeo_id,
-            false
+    $video = $course->videos->first();
+    Livewire::test(VideoPlayer::class, ['video' => $video])
+        ->assertSeeHtml(
+            '<iframe src="https://player.vimeo.com/video/'.$video->vimeo_id,
         );
 });

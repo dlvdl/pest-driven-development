@@ -10,8 +10,6 @@ class VideoPlayer extends Component
 {
     public Video $video;
 
-    public function mount() {}
-
     public function render(): View
     {
         return view('livewire.video-player');

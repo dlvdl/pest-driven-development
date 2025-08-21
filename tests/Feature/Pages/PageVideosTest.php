@@ -27,39 +27,27 @@ it('includes video player', function () {
 
 it('shows first course video by default', function () {
     $course = Course::factory()
-        ->has(Video::factory()->state(['title' => 'My video']))
+        ->has(Video::factory())
         ->create();
 
     loginAsUser();
+    $video = $course->videos()->first();
     get(route('page.course-videos', $course))
         ->assertOk()
-        ->assertSeeText(
-            ['My video']
-        );
+        ->assertSeeText($video->title);
 });
 
 it('shows provided course video', function () {
     $course = Course::factory()
-        ->has(
-            Video::factory()
-                ->state(
-                    new Sequence(
-                        ['title' => 'My first video'],
-                        ['title' => 'My second video'],
-                        ['title' => 'My third video'],
-                    )
-                )
-                ->count(3)
-        )
+        ->has(Video::factory()->count(3))
         ->create();
 
     loginAsUser();
+    $video = $course->videos()->orderByDesc('id')->first();
     get(route('page.course-videos', [
         'course' => $course,
-        'video' => $course->videos()->orderByDesc('id')->first(),
+        'video' => $video,
     ]))
         ->assertOk()
-        ->assertSeeText(
-            ['My third video']
-        );
+        ->assertSeeText($video->title);
 });
