@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
 
         Course::factory()
             ->count(3)
+            ->released()
             ->has(Video::factory()->count(3))
             ->create()
             ->each(
