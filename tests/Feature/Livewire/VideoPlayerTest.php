@@ -51,8 +51,27 @@ test('shows list of all course videos', function () {
             'third video',
         ])
         ->assertSeeHtml([
-            route('page.course-videos', Video::where('title', 'first video')->first()),
-            route('page.course-videos', Video::where('title', 'second video')->first()),
-            route('page.course-videos', Video::where('title', 'third video')->first()),
+            route(
+                'page.course-videos',
+                [
+                    'course' => $course,
+                    'video' => Video::where('title', 'first video')->first()
+                ]
+
+            ),
+            route(
+                'page.course-videos',
+                [
+                    'course' => $course,
+                    'video' => Video::where('title', 'second video')->first()
+                ]
+            ),
+            route(
+                'page.course-videos',
+                [
+                    'course' => $course,
+                    'video' => Video::where('title', 'third video')->first()
+                ]
+            ),
         ]);
 });

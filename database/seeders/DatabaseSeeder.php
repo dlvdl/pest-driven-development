@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Course;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Video;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -23,7 +24,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Course::factory()
-            ->count(10)
+            ->count(3)
+            ->has(Video::factory()->count(3))
             ->create()
             ->each(
                 fn ($course) => $user->courses()->attach($course)
