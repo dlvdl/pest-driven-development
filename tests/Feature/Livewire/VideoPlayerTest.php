@@ -2,6 +2,7 @@
 
 use App\Livewire\VideoPlayer;
 use App\Models\Course;
+use App\Models\User;
 use App\Models\Video;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 
@@ -71,4 +72,44 @@ test('shows list of all course videos', function () {
                 ]
             ),
         ]);
+});
+
+test('mark video as completed', function () {
+    $user = User::factory()->create();
+    $course = Course::factory()
+        ->has(Video::factory()->state(['title' => 'first video']))
+        ->create();
+
+    $user->courses()->attach($course);
+
+    expect($user->videos)->toHaveCount(0);
+
+    loginAsUser($user);
+    Livewire::test(VideoPlayer::class, ['video' => $course->videos()->first()])
+        ->call('markVideoAsCompleted');
+
+    $user->refresh();
+    expect($user->videos)
+        ->toHaveCount(1)
+        ->first()->title->toEqual('first video');
+});
+
+test('marks video as not completed', function () {
+    $user = User::factory()->create();
+    $course = Course::factory()
+        ->has(Video::factory()->state(['title' => 'first video']))
+        ->create();
+
+    $user->courses()->attach($course);
+    $user->videos()->attach($course->videos()->first());
+
+    expect($user->videos)->toHaveCount(1);
+
+    loginAsUser($user);
+    Livewire::test(VideoPlayer::class, ['video' => $course->videos()->first()])
+        ->call('markVideoAsNotCompleted');
+
+    $user->refresh();
+    expect($user->videos)
+        ->toHaveCount(0);
 });
