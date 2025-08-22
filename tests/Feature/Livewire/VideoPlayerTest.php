@@ -3,6 +3,7 @@
 use App\Livewire\VideoPlayer;
 use App\Models\Course;
 use App\Models\Video;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 
 test('show details for given video', function () {
     $course = Course::factory()
@@ -18,7 +19,7 @@ test('show details for given video', function () {
         ]);
 });
 
-test('shows video', function () {
+test('shows given video', function () {
     $course = Course::factory()
         ->has(Video::factory())
         ->create();
@@ -28,4 +29,30 @@ test('shows video', function () {
         ->assertSeeHtml(
             '<iframe src="https://player.vimeo.com/video/'.$video->vimeo_id,
         );
+});
+
+test('shows list of all course videos', function () {
+    $course = Course::factory()
+        ->has(
+            Video::factory()
+                ->count(3)
+                ->state(new Sequence(
+                    ['title' => 'first video'],
+                    ['title' => 'second video'],
+                    ['title' => 'third video'],
+                ))
+        )
+        ->create();
+
+    Livewire::test(VideoPlayer::class, ['video' => $course->videos()->first()])
+        ->assertSee([
+            'first video',
+            'second video',
+            'third video',
+        ])
+        ->assertSeeHtml([
+            route('page.course-videos', Video::where('title', 'first video')->first()),
+            route('page.course-videos', Video::where('title', 'second video')->first()),
+            route('page.course-videos', Video::where('title', 'third video')->first()),
+        ]);
 });
