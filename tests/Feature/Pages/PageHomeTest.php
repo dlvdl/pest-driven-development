@@ -46,6 +46,19 @@ it('shows courses by release date', function () {
         ]);
 });
 
+it('shows links to courses', function () {
+    $firstCourse = Course::factory()->released()->create();
+    $secondCourse = Course::factory()->released()->create();
+    $lastCourse = Course::factory()->released()->create();
+
+    get(route('pages.home'))
+        ->assertSeeHtml([
+            route('pages.course-details', $firstCourse),
+            route('pages.course-details', $secondCourse),
+            route('pages.course-details', $lastCourse),
+        ]);
+});
+
 it('includes login if not logged in', function () {
     get(route('pages.home'))
         ->assertOk()
