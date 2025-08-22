@@ -34,7 +34,7 @@
             <div class="card bg-gradient-to-br from-base-100 to-base-200">
                 <div class="card-body p-0">
                     <div class="bg-gradient-to-r from-primary to-secondary p-6 rounded-t-2xl">
-                        <flux:heading size="lg">Videos in the course</flux:heading>
+                        <flux:heading size="lg">Videos in this course</flux:heading>
                         <flux:text>{{ count($courseVideos) }} total videos</flux:text>
                     </div>
 
