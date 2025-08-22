@@ -10,7 +10,8 @@ use Livewire\Component;
 class VideoPlayer extends Component
 {
     public Video $video;
-    public Collection|null $courseVideos;
+
+    public ?Collection $courseVideos;
 
     public function mount(Video $video)
     {
