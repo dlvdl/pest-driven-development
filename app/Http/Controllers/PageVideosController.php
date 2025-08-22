@@ -12,6 +12,6 @@ class PageVideosController extends Controller
         $course->load('videos');
         $video = $video->exists ? $video : $course->videos->first();
 
-        return view('page.videos', compact('video'));
+        return view('pages.videos', compact('video'));
     }
 }
