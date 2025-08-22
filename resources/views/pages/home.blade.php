@@ -227,15 +227,18 @@
 
         <div id="courses-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @foreach($courses as $course)
-                <div class="flux-card overflow-hidden hover:shadow-md transition-shadow duration-300 dark:bg-zinc-800 dark:border-zinc-700">
-                    <div class="aspect-video">
-                        <img alt="{{ $course->title }}" class="w-full h-full object-cover" />
+                <a href="{{ route('pages.course-details', $course) }}">
+                    <div
+                        class="flux-card overflow-hidden hover:shadow-md transition-shadow duration-300 dark:bg-zinc-800 dark:border-zinc-700">
+                        <div class="aspect-video">
+                            <img alt="{{ $course->title }}" class="w-full h-full object-cover"/>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-zinc-900 dark:text-white mb-3">{{ $course->title }}</h3>
+                            <p class="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed mb-4">{{ $course->description }}</p>
+                        </div>
                     </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-zinc-900 dark:text-white mb-3">{{ $course->title }}</h3>
-                        <p class="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed mb-4">{{ $course->description }}</p>
-                    </div>
-                </div>
+                </a>
             @endforeach
         </div>
 
