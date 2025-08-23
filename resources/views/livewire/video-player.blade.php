@@ -40,41 +40,67 @@
 
                     <div class="max-h-96 overflow-y-auto">
                         @foreach($courseVideos as $index => $courseVideo)
-                            <a href="{{ route('page.course-videos', ['course' => $courseVideo->course, 'video' => $courseVideo]) }}">
-                                <div
-                                    class="group border-base-300 last:border-b-0 hover:bg-gradient-to-r hover:from-primary/5 hover:to-secondary/5 transition-all duration-300">
-                                    <div class="p-4 flex items-center gap-4">
-                                        <div class="flex-shrink-0">
-                                            <div
-                                                class="dark:text-white w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center font-bold text-lg shadow group-hover:scale-110 transition-transform duration-300">
-                                                {{ $index + 1 }}
+                            @if($this->isCurrentVideo($courseVideo))
+                                <div>
+                                    <div
+                                        class="group border-base-300 last:border-b-0 hover:bg-gradient-to-r hover:from-primary/5 hover:to-secondary/5 transition-all duration-300">
+                                        <div class="p-4 flex items-center gap-4">
+                                            <div class="flex-shrink-0">
+                                                <div
+                                                    class="dark:text-white w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center font-bold text-lg shadow group-hover:scale-110 transition-transform duration-300">
+                                                    {{ $index + 1 }}
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="flex-1 min-w-0">
-                                            <div class="flex items-center gap-2 mb-1">
-                                                <div>
-                                                    <flux:heading>{{ $courseVideo->title }}</flux:heading>
-                                                    <flux:text size="sm">{{ $courseVideo->description }}</flux:text>
+                                            <div class="flex-1 min-w-0">
+                                                <div class="flex items-center gap-2 mb-1">
+                                                    <div>
+                                                        <flux:heading>{{ $courseVideo->title }}</flux:heading>
+                                                        <flux:text size="sm">{{ $courseVideo->description }}</flux:text>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="flex-shrink-0">
-                                            <button
-                                                class="dark:text-white btn btn-circle border-0 shadow btn-primary btn-sm group-hover:shadow-xl group-hover:scale-110 transition-all duration-300">
-                                                <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg"
-                                                     viewBox="0 0 24 24">
-                                                    <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2"
-                                                       fill="none" stroke="currentColor">
-                                                        <path d="M6 3L20 12 6 21 6 3z"></path>
-                                                    </g>
-                                                </svg>
-                                            </button>
-                                        </div>
                                     </div>
                                 </div>
-                            </a>
+                            @else
+                                <a href="{{ route('page.course-videos', ['course' => $courseVideo->course, 'video' => $courseVideo]) }}">
+                                    <div
+                                        class="group border-base-300 last:border-b-0 hover:bg-gradient-to-r hover:from-primary/5 hover:to-secondary/5 transition-all duration-300">
+                                        <div class="p-4 flex items-center gap-4">
+                                            <div class="flex-shrink-0">
+                                                <div
+                                                    class="dark:text-white w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center font-bold text-lg shadow group-hover:scale-110 transition-transform duration-300">
+                                                    {{ $index + 1 }}
+                                                </div>
+                                            </div>
+
+                                            <div class="flex-1 min-w-0">
+                                                <div class="flex items-center gap-2 mb-1">
+                                                    <div>
+                                                        <flux:heading>{{ $courseVideo->title }}</flux:heading>
+                                                        <flux:text size="sm">{{ $courseVideo->description }}</flux:text>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="flex-shrink-0">
+                                                <button
+                                                    class="dark:text-white btn btn-circle border-0 shadow btn-primary btn-sm group-hover:shadow-xl group-hover:scale-110 transition-all duration-300">
+                                                    <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg"
+                                                         viewBox="0 0 24 24">
+                                                        <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2"
+                                                           fill="none" stroke="currentColor">
+                                                            <path d="M6 3L20 12 6 21 6 3z"></path>
+                                                        </g>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            @endif
+
                         @endforeach
                     </div>
 

@@ -24,20 +24,30 @@ test('shows given video', function () {
 });
 
 test('shows list of all course videos', function () {
-    $course = createCourseAndVideos(10);
+    $course = createCourseAndVideos(3);
 
     $videos = $course->videos;
-    $firstVideo = $videos->first();
+
     $videosTitles = $videos->pluck('title')->toArray();
-    $videosLinks = $videos->reduce(function ($carry, $video) use ($course) {
-        $carry[] = route('page.course-videos', $course, $video);
-
-        return $carry;
-    }, []);
-
-    Livewire::test(VideoPlayer::class, ['video' => $firstVideo])
+    Livewire::test(VideoPlayer::class, ['video' => $videos[0]])
         ->assertSee($videosTitles)
-        ->assertSeeHtml($videosLinks);
+        ->assertSeeHtml([
+            '<a href="' . route('page.course-videos', ['course' => $course, 'video' => $videos[1]]) . '"',
+            '<a href="' . route('page.course-videos', ['course' => $course, 'video' => $videos[2]]) . '"',
+        ]);
+});
+
+test('does not include route for current video', function () {
+    $course = createCourseAndVideos(3);
+
+    $videos = $course->videos;
+    $videosTitles = $videos->pluck('title')->toArray();
+
+    Livewire::test(VideoPlayer::class, ['video' => $videos[0]])
+        ->assertSee($videosTitles)
+        ->assertDontSeeHtml([
+            '<a href="' . route('page.course-videos', ['course' => $course, 'video' => $videos[0]]) . '"',
+        ]);
 });
 
 test('mark video as completed', function () {
