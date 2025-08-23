@@ -14,13 +14,16 @@ test('cannot be accessed by guest', function () {
 
 test('lists purchased courses', function () {
     $user = User::factory()
-        ->has(Course::factory()->count(3)->state(
-            new Sequence(
-                ['title' => 'Course A'],
-                ['title' => 'Course B'],
-                ['title' => 'Course C'],
-            )
-        ))
+        ->has(
+            Course::factory()->count(3)->state(
+                new Sequence(
+                    ['title' => 'Course A'],
+                    ['title' => 'Course B'],
+                    ['title' => 'Course C'],
+                )
+            ),
+            'purchasedCourses'
+        )
         ->create();
 
     loginAsUser($user);
@@ -34,18 +37,29 @@ test('lists purchased courses', function () {
 });
 
 test('does not list other courses', function () {
-    $user = User::factory()->has(Course::factory()->count(3)->state(
-        new Sequence(
-            ['title' => 'Course A'],
-            ['title' => 'Course B'], )
-    ))
+    $user = User::factory()
+        ->has(
+            Course::factory()
+                ->count(3)
+                ->state(
+                    new Sequence(
+                        ['title' => 'Course A'],
+                        ['title' => 'Course B'],
+                    )
+                ),
+            'purchasedCourses'
+        )
         ->create();
 
-    $anotherUser = User::factory()->has(Course::factory()->count(3)->state(
-        new Sequence(
-            ['title' => 'Course C'],
-            ['title' => 'Course E'], )
-    ))
+    $anotherUser = User::factory()
+        ->has(Course::factory()
+            ->count(3)
+            ->state(
+                new Sequence(['title' => 'Course C'], ['title' => 'Course E']
+                )
+            ),
+            'purchasedCourses'
+        )
         ->create();
 
     $courseWithoutUser = Course::factory()->create();
@@ -69,8 +83,8 @@ test('shows latest purchased courses', function () {
     $firstPurchasedCourse = Course::factory()->create();
     $lastPurchasedCourse = Course::factory()->create();
 
-    $user->courses()->attach($firstPurchasedCourse->id, ['created_at' => Carbon::yesterday()]);
-    $user->courses()->attach($lastPurchasedCourse->id, ['created_at' => Carbon::now()]);
+    $user->purchasedCourses()->attach($firstPurchasedCourse->id, ['created_at' => Carbon::yesterday()]);
+    $user->purchasedCourses()->attach($lastPurchasedCourse->id, ['created_at' => Carbon::now()]);
 
     loginAsUser($user);
     get(route('dashboard'))
@@ -83,7 +97,7 @@ test('shows latest purchased courses', function () {
 
 test('includes link to products videos', function () {
     $user = User::factory()
-        ->has(Course::factory())
+        ->has(Course::factory(), 'purchasedCourses')
         ->create();
 
     loginAsUser($user);
