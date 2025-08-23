@@ -11,7 +11,9 @@
 |
 */
 
+use App\Models\Course;
 use App\Models\User;
+use App\Models\Video;
 
 use function Pest\Laravel\actingAs;
 
@@ -48,8 +50,16 @@ expect()->extend('toBeOne', function () {
 function loginAsUser(?User $user = null): User
 {
     $user = $user ?? User::factory()->create();
-
     actingAs($user);
 
     return $user;
+}
+
+function createCourseAndVideos(int $videosCount = 1): Course
+{
+    return Course::factory()
+        ->has(Video::factory()
+            ->count($videosCount)
+        )
+        ->create();
 }

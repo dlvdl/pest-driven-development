@@ -1,22 +1,18 @@
 <?php
 
 use App\Livewire\VideoPlayer;
-use App\Models\Course;
-use App\Models\Video;
 
 use function Pest\Laravel\get;
 
 it('cannot be accessed with guest', function () {
-    $course = Course::factory()->create();
+    $course = createCourseAndVideos();
 
     get(route('page.course-videos', $course))
         ->assertRedirect(route('login'));
 });
 
 it('includes video player', function () {
-    $course = Course::factory()
-        ->has(Video::factory())
-        ->create();
+    $course = createCourseAndVideos(3);
 
     loginAsUser();
     get(route('page.course-videos', $course))
@@ -25,9 +21,7 @@ it('includes video player', function () {
 });
 
 it('shows first course video by default', function () {
-    $course = Course::factory()
-        ->has(Video::factory())
-        ->create();
+    $course = createCourseAndVideos(3);
 
     loginAsUser();
     $video = $course->videos()->first();
@@ -37,9 +31,7 @@ it('shows first course video by default', function () {
 });
 
 it('shows provided course video', function () {
-    $course = Course::factory()
-        ->has(Video::factory()->count(3))
-        ->create();
+    $course = createCourseAndVideos(3);
 
     loginAsUser();
     $video = $course->videos()->orderByDesc('id')->first();

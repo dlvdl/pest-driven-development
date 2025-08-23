@@ -10,9 +10,7 @@ test('gives back readable video duration', function () {
 });
 
 test('gives back video course', function () {
-    $course = Course::factory()
-        ->has(Video::factory())
-        ->create();
+    $course = createCourseAndVideos();
 
     $video = $course->videos()->first();
 

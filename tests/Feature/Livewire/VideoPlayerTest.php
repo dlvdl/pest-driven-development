@@ -1,14 +1,10 @@
 <?php
 
 use App\Livewire\VideoPlayer;
-use App\Models\Course;
 use App\Models\User;
-use App\Models\Video;
 
 test('show details for given video', function () {
-    $course = Course::factory()
-        ->has(Video::factory())
-        ->create();
+    $course = createCourseAndVideos();
 
     $video = $course->videos->first();
     Livewire::test(VideoPlayer::class, ['video' => $video])
@@ -20,9 +16,7 @@ test('show details for given video', function () {
 });
 
 test('shows given video', function () {
-    $course = Course::factory()
-        ->has(Video::factory())
-        ->create();
+    $course = createCourseAndVideos();
 
     $video = $course->videos->first();
     Livewire::test(VideoPlayer::class, ['video' => $video])
@@ -30,12 +24,7 @@ test('shows given video', function () {
 });
 
 test('shows list of all course videos', function () {
-    $course = Course::factory()
-        ->has(
-            Video::factory()
-                ->count(3)
-        )
-        ->create();
+    $course = createCourseAndVideos(10);
 
     $videos = $course->videos;
     $firstVideo = $videos->first();
@@ -53,9 +42,7 @@ test('shows list of all course videos', function () {
 
 test('mark video as completed', function () {
     $user = User::factory()->create();
-    $course = Course::factory()
-        ->has(Video::factory())
-        ->create();
+    $course = createCourseAndVideos();
 
     $user->purchasedCourses()->attach($course);
 
@@ -73,9 +60,7 @@ test('mark video as completed', function () {
 
 test('marks video as not completed', function () {
     $user = User::factory()->create();
-    $course = Course::factory()
-        ->has(Video::factory())
-        ->create();
+    $course = createCourseAndVideos();
 
     $user->purchasedCourses()->attach($course);
     $user->watchedVideos()->attach($course->videos()->first());
