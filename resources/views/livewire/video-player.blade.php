@@ -119,10 +119,21 @@
                                 Share
                             </flux:button>
 
-                            <flux:button variant="ghost">
-                                <flux:icon.chevron-down/>
-                                Mark as completed
-                            </flux:button>
+                            @if(auth()->user()->watchedVideos()->where('video_id', $video->id)->count())
+                                <flux:button class="flex" wire:click="markVideoAsNotCompleted" variant="ghost">
+                                    <div class="flex items-center gap-1">
+                                        <flux:icon.chevron-down/>
+                                        Mark as not completed
+                                    </div>
+                                </flux:button>
+                            @else
+                                <flux:button class="flex" wire:click="markVideoAsCompleted" variant="ghost">
+                                    <div class="flex items-center gap-1">
+                                        <flux:icon.chevron-down/>
+                                        Mark as completed
+                                    </div>
+                                </flux:button>
+                            @endif
                         </div>
                     </div>
                 </div>
