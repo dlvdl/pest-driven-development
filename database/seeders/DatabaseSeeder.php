@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             ->has(Video::factory()->count(3))
             ->create()
             ->each(
-                fn ($course) => $user->courses()->attach($course)
+                fn ($course) => $user->purchasedCourses()->attach($course)
             );
     }
 }
