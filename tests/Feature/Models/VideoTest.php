@@ -16,3 +16,22 @@ test('gives back video course', function () {
 
     expect($video->course)->toBeInstanceOf(Course::class);
 });
+
+test('tells if current user has not yet watched a given video', function () {
+    $video = Video::factory()->create();
+
+    loginAsUser();
+
+    expect($video->alreadyWatchedByCurrentUser())
+        ->toBeFalse();
+});
+
+test('tells if current user has already watched a given video', function () {
+    $video = Video::factory()->create();
+
+    $user = loginAsUser();
+    $user->watchedVideos()->attach($video);
+
+    expect($video->alreadyWatchedByCurrentUser())
+        ->toBeTrue();
+});

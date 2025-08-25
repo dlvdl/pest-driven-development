@@ -119,7 +119,7 @@
                                 Share
                             </flux:button>
 
-                            @if(auth()->user()->watchedVideos()->where('video_id', $video->id)->count())
+                            @if($video->alreadyWatchedByCurrentUser())
                                 <flux:button class="flex" wire:click="markVideoAsNotCompleted" variant="ghost">
                                     <div class="flex items-center gap-1">
                                         <flux:icon.chevron-down/>
