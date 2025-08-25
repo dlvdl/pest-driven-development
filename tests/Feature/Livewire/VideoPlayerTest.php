@@ -1,7 +1,6 @@
 <?php
 
 use App\Livewire\VideoPlayer;
-use App\Models\User;
 
 beforeEach(function () {
     $this->loggedInUser = loginAsUser();
@@ -49,7 +48,7 @@ test('does not include route for current video', function () {
     Livewire::test(VideoPlayer::class, ['video' => $videos[0]])
         ->assertSee($videosTitles)
         ->assertDontSeeHtml([
-            '<a href="' . route('page.course-videos', ['course' => $course, 'video' => $videos[0]]) . '"',
+            '<a href="'.route('page.course-videos', ['course' => $course, 'video' => $videos[0]]).'"',
         ]);
 });
 
