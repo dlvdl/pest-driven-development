@@ -10,26 +10,9 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        $user = User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'password' => bcrypt('password'),
-        ]);
-
-        Course::factory()
-            ->count(3)
-            ->released()
-            ->has(Video::factory()->count(3))
-            ->create()
-            ->each(
-                fn ($course) => $user->purchasedCourses()->attach($course)
-            );
+        $this->call(CourseSeeder::class);
+        $this->call(VideoSeeder::class);
     }
 }
