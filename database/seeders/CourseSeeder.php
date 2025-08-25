@@ -24,10 +24,10 @@ class CourseSeeder extends Seeder
                 'Work with routes, controllers, and views',
                 'Set up databases and run migrations',
                 'Build CRUD functionality',
-                'Deploy a Laravel application'
+                'Deploy a Laravel application',
             ],
             'image_name' => 'laravel-beginners.jpg',
-            'released_at' => now()
+            'released_at' => now(),
         ]);
 
         Course::create([
@@ -40,10 +40,10 @@ class CourseSeeder extends Seeder
                 'Implement event-driven architecture',
                 'Use queues and jobs for background processing',
                 'Optimize performance and caching',
-                'Build and document REST APIs'
+                'Build and document REST APIs',
             ],
             'image_name' => 'advanced-laravel.jpg',
-            'released_at' => now()->subMonths(3)
+            'released_at' => now()->subMonths(3),
         ]);
 
         Course::create([
@@ -56,10 +56,10 @@ class CourseSeeder extends Seeder
                 'Write unit and feature tests',
                 'Practice red-green-refactor cycle',
                 'Test drive CRUD applications',
-                'Develop confidence in refactoring'
+                'Develop confidence in refactoring',
             ],
             'image_name' => 'tdd-laravel.jpg',
-            'released_at' => now()->subMonths(6)
+            'released_at' => now()->subMonths(6),
         ]);
     }
 

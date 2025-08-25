@@ -3,6 +3,7 @@
 use App\Models\Course;
 use App\Models\User;
 use App\Models\Video;
+
 use function Pest\Laravel\artisan;
 use function Pest\Laravel\assertDatabaseCount;
 use function Pest\Laravel\assertDatabaseHas;
