@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Course;
+use App\Models\User;
 use App\Models\Video;
 use function Pest\Laravel\artisan;
 use function Pest\Laravel\assertDatabaseCount;
@@ -57,4 +58,42 @@ test('adds videos only once', function () {
     artisan('db:seed');
 
     assertDatabaseCount(Video::class, 8);
+});
+
+test('adds local user', function () {
+    App::partialMock()->shouldReceive('environment')->andReturn('local');
+    assertDatabaseCount(User::class, 0);
+
+    artisan('db:seed');
+
+    $user = User::where('email', 'test@test.com')->first();
+    $firstCourse = Course::where('title', 'Laravel Course For Beginners')->first();
+    $secondCourse = Course::where('title', 'Advanced Laravel')->first();
+
+    $user->purchasedCourses()->attach([$firstCourse, $secondCourse]);
+
+    assertDatabaseCount(User::class, 1);
+
+    expect($user)
+        ->purchasedCourses
+        ->toHaveCount(2);
+});
+
+test('adds local user only once', function () {
+    App::partialMock()->shouldReceive('environment')->andReturn('local');
+    assertDatabaseCount(User::class, 0);
+
+    artisan('db:seed');
+    artisan('db:seed');
+
+    assertDatabaseCount(User::class, 1);
+});
+
+test('does not add  local user to production', function () {
+    App::partialMock()->shouldReceive('environment')->andReturn('production');
+    assertDatabaseCount(User::class, 0);
+
+    artisan('db:seed');
+
+    assertDatabaseCount(User::class, 0);
 });
