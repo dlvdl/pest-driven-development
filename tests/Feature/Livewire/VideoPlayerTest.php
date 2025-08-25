@@ -32,8 +32,8 @@ test('shows list of all course videos', function () {
     Livewire::test(VideoPlayer::class, ['video' => $videos[0]])
         ->assertSee($videosTitles)
         ->assertSeeHtml([
-            '<a href="' . route('page.course-videos', ['course' => $course, 'video' => $videos[1]]) . '"',
-            '<a href="' . route('page.course-videos', ['course' => $course, 'video' => $videos[2]]) . '"',
+            route('page.course-videos', ['course' => $course, 'video' => $videos[1]]),
+            route('page.course-videos', ['course' => $course, 'video' => $videos[2]]),
         ]);
 });
 
