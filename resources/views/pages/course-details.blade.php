@@ -10,6 +10,11 @@
           rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css"/>
+    <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+    <script type="text/javascript">
+      Paddle.Environment.set("sandbox");
+      Paddle.Initialize({token: "{{ config('services.paddle.client_side_token') }}"});
+    </script>
     <style>
         :root {
             --color-zinc-50: #fafafa;
@@ -207,7 +212,15 @@
 
                 <!-- Action Buttons -->
                 <div class="flex flex-col sm:flex-row gap-4">
-                    <button class="flux-button px-8 py-3 text-base flex items-center gap-2">
+                    <button
+                        class="paddle_button flux-button px-8 py-3 text-base flex items-center gap-2"
+                        data-items='[
+                            {
+                              "priceId": "{{ $course->paddle_product_id }}",
+                              "quantity": 1
+                            }
+                          ]'
+                    >
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                   d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
