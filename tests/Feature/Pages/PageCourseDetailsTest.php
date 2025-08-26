@@ -44,7 +44,7 @@ it('includes paddle checkout button', function () {
         ->released()
         ->has(Video::factory()->count(3))
         ->create([
-            'paddle_product_id' => 'product-id'
+            'paddle_price_id' => 'product-price-id'
         ]);
 
     get(route('pages.course-details', $course))
@@ -53,5 +53,5 @@ it('includes paddle checkout button', function () {
         ->assertSee('Paddle.Environment.set("sandbox");', false)
         ->assertSee('Paddle.Initialize({token: "vendor-id"});', false)
         ->assertSee('paddle_button', false)
-        ->assertSee($course->paddle_product_id);
+        ->assertSee($course->paddle_price_id);
 });

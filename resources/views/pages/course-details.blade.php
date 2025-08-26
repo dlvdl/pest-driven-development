@@ -216,7 +216,7 @@
                         class="paddle_button flux-button px-8 py-3 text-base flex items-center gap-2"
                         data-items='[
                             {
-                              "priceId": "{{ $course->paddle_product_id }}",
+                              "priceId": "{{ $course->paddle_price_id }}",
                               "quantity": 1
                             }
                           ]'
