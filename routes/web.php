@@ -22,4 +22,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 });
 
+Route::webhooks('webhooks');
+
 require __DIR__.'/auth.php';
