@@ -1,23 +1,23 @@
 <?php
 
-
 use App\Jobs\HandlePaddlePurchaseJob;
 use Spatie\WebhookClient\Models\WebhookCall;
+
 use function Pest\Laravel\assertDatabaseCount;
 use function Pest\Laravel\post;
 use function Pest\Laravel\postJson;
-use function Pest\Laravel\withoutExceptionHandling;
 
 test('stores a paddle purchase request', function () {
+    Queue::fake();
     assertDatabaseCount(WebhookCall::class, 0);
 
-    [$signature, $paddleRequestData] = generatePaddleTestData();
+    [$signature, $paddleRequestData] = getValidPaddleRequestData();
 
     postJson(
         'webhooks',
         $paddleRequestData,
         [
-            'paddle-signature' => $signature
+            'paddle-signature' => $signature,
         ]
     );
 
@@ -35,13 +35,13 @@ test('does not store invalid paddle purchase request', function () {
 test('dispatches a job for valid paddle request', function () {
     Queue::fake();
 
-    [$signature, $paddleRequestData] = generatePaddleTestData();
+    [$signature, $paddleRequestData] = getValidPaddleRequestData();
 
     postJson(
         'webhooks',
         $paddleRequestData,
         [
-            'paddle-signature' => $signature
+            'paddle-signature' => $signature,
         ]
     );
 
@@ -51,13 +51,13 @@ test('dispatches a job for valid paddle request', function () {
 test('does not dispatch job for invalid paddle request', function () {
     Queue::fake();
 
-    [$signature, $paddleRequestData] = generatePaddleTestData();
+    [$signature, $paddleRequestData] = getValidPaddleRequestData();
 
     postJson(
         'webhooks',
         [],
         [
-            'paddle-signature' => $signature
+            'paddle-signature' => $signature,
         ]
     );
 

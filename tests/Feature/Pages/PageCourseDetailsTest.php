@@ -44,7 +44,7 @@ it('includes paddle checkout button', function () {
         ->released()
         ->has(Video::factory()->count(3))
         ->create([
-            'paddle_price_id' => 'product-price-id'
+            'paddle_price_id' => 'product-price-id',
         ]);
 
     get(route('pages.course-details', $course))

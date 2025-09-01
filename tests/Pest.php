@@ -64,7 +64,7 @@ function createCourseAndVideos(int $videosCount = 1): Course
         ->create();
 }
 
-function generatePaddleTestData()
+function getValidPaddleRequestData(): array
 {
     $paddleRequestData = [
         'event_id' => 'ntfsimevt_01k40mmzwh4gmws669b6acsg37',
@@ -82,14 +82,14 @@ function generatePaddleTestData()
                         'status' => 'active',
                         'quantity' => [
                             'maximum' => 999,
-                            'minimum' => 1
+                            'minimum' => 1,
                         ],
                         'tax_mode' => 'account_setting',
                         'created_at' => '2023-02-23T13:55:22.538367Z',
                         'product_id' => 'pro_01gsz4t5hdjse780zja8vvr7jg',
                         'unit_price' => [
                             'amount' => '3000',
-                            'currency_code' => 'USD'
+                            'currency_code' => 'USD',
                         ],
                         'updated_at' => '2024-04-11T13:54:52.254748Z',
                         'custom_data' => null,
@@ -98,12 +98,12 @@ function generatePaddleTestData()
                         'trial_period' => null,
                         'billing_cycle' => [
                             'interval' => 'month',
-                            'frequency' => 1
+                            'frequency' => 1,
                         ],
-                        'unit_price_overrides' => []
+                        'unit_price_overrides' => [],
                     ],
                     'quantity' => 10,
-                    'proration' => null
+                    'proration' => null,
                 ],
                 [
                     'price' => [
@@ -113,14 +113,14 @@ function generatePaddleTestData()
                         'status' => 'active',
                         'quantity' => [
                             'maximum' => 100,
-                            'minimum' => 1
+                            'minimum' => 1,
                         ],
                         'tax_mode' => 'account_setting',
                         'created_at' => '2023-06-01T13:31:12.625056Z',
                         'product_id' => 'pro_01h1vjes1y163xfj1rh1tkfb65',
                         'unit_price' => [
                             'amount' => '10000',
-                            'currency_code' => 'USD'
+                            'currency_code' => 'USD',
                         ],
                         'updated_at' => '2024-04-09T07:23:00.907834Z',
                         'custom_data' => null,
@@ -129,12 +129,12 @@ function generatePaddleTestData()
                         'trial_period' => null,
                         'billing_cycle' => [
                             'interval' => 'month',
-                            'frequency' => 1
+                            'frequency' => 1,
                         ],
-                        'unit_price_overrides' => []
+                        'unit_price_overrides' => [],
                     ],
                     'quantity' => 1,
-                    'proration' => null
+                    'proration' => null,
                 ],
                 [
                     'price' => [
@@ -144,14 +144,14 @@ function generatePaddleTestData()
                         'status' => 'active',
                         'quantity' => [
                             'maximum' => 1,
-                            'minimum' => 1
+                            'minimum' => 1,
                         ],
                         'tax_mode' => 'account_setting',
                         'created_at' => '2023-02-23T14:01:28.391712Z',
                         'product_id' => 'pro_01gsz97mq9pa4fkyy0wqenepkz',
                         'unit_price' => [
                             'amount' => '19900',
-                            'currency_code' => 'USD'
+                            'currency_code' => 'USD',
                         ],
                         'updated_at' => '2024-04-09T07:23:10.921392Z',
                         'custom_data' => null,
@@ -159,11 +159,11 @@ function generatePaddleTestData()
                         'import_meta' => null,
                         'trial_period' => null,
                         'billing_cycle' => null,
-                        'unit_price_overrides' => []
+                        'unit_price_overrides' => [],
                     ],
                     'quantity' => 1,
-                    'proration' => null
-                ]
+                    'proration' => null,
+                ],
             ],
             'origin' => 'web',
             'status' => 'draft',
@@ -179,7 +179,7 @@ function generatePaddleTestData()
                     'subtotal' => '59900',
                     'grand_total' => '65215',
                     'currency_code' => 'USD',
-                    'credit_to_balance' => '0'
+                    'credit_to_balance' => '0',
                 ],
                 'line_items' => [
                     [
@@ -188,7 +188,7 @@ function generatePaddleTestData()
                             'tax' => '2662',
                             'total' => '32662',
                             'discount' => '0',
-                            'subtotal' => '30000'
+                            'subtotal' => '30000',
                         ],
                         'product' => [
                             'id' => 'pro_01gsz4t5hdjse780zja8vvr7jg',
@@ -205,17 +205,17 @@ function generatePaddleTestData()
                                     'payment_by_invoice' => false,
                                     'aircraft_performance' => true,
                                     'compliance_monitoring' => true,
-                                    'flight_log_management' => true
+                                    'flight_log_management' => true,
                                 ],
                                 'suggested_addons' => [
                                     'pro_01h1vjes1y163xfj1rh1tkfb65',
-                                    'pro_01gsz97mq9pa4fkyy0wqenepkz'
+                                    'pro_01gsz97mq9pa4fkyy0wqenepkz',
                                 ],
-                                'upgrade_description' => 'Move from Basic to Pro to take advantage of aircraft performance, advanced route planning, and compliance monitoring.'
+                                'upgrade_description' => 'Move from Basic to Pro to take advantage of aircraft performance, advanced route planning, and compliance monitoring.',
                             ],
                             'description' => 'Designed for professional pilots, including all features plus in Basic plus compliance monitoring, route optimization, and third-party integrations.',
                             'import_meta' => null,
-                            'tax_category' => 'standard'
+                            'tax_category' => 'standard',
                         ],
                         'price_id' => 'pri_01gsz8x8sawmvhz1pv30nge1ke',
                         'quantity' => 10,
@@ -224,8 +224,8 @@ function generatePaddleTestData()
                             'tax' => '266',
                             'total' => '3266',
                             'discount' => '0',
-                            'subtotal' => '3000'
-                        ]
+                            'subtotal' => '3000',
+                        ],
                     ],
                     [
                         'id' => 'txnitm_01hv8wt98jahpbm1t1v1sd067y',
@@ -233,7 +233,7 @@ function generatePaddleTestData()
                             'tax' => '887',
                             'total' => '10887',
                             'discount' => '0',
-                            'subtotal' => '10000'
+                            'subtotal' => '10000',
                         ],
                         'product' => [
                             'id' => 'pro_01h1vjes1y163xfj1rh1tkfb65',
@@ -246,7 +246,7 @@ function generatePaddleTestData()
                             'custom_data' => null,
                             'description' => 'Unlock advanced insights into your flight data with enhanced analytics and reporting features. Includes customizable reporting templates and trend analysis across flights.',
                             'import_meta' => null,
-                            'tax_category' => 'standard'
+                            'tax_category' => 'standard',
                         ],
                         'price_id' => 'pri_01h1vjfevh5etwq3rb416a23h2',
                         'quantity' => 1,
@@ -255,8 +255,8 @@ function generatePaddleTestData()
                             'tax' => '887',
                             'total' => '10887',
                             'discount' => '0',
-                            'subtotal' => '10000'
-                        ]
+                            'subtotal' => '10000',
+                        ],
                     ],
                     [
                         'id' => 'txnitm_01hv8wt98jahpbm1t1v67vqnb6',
@@ -264,7 +264,7 @@ function generatePaddleTestData()
                             'tax' => '1766',
                             'total' => '21666',
                             'discount' => '0',
-                            'subtotal' => '19900'
+                            'subtotal' => '19900',
                         ],
                         'product' => [
                             'id' => 'pro_01gsz97mq9pa4fkyy0wqenepkz',
@@ -277,7 +277,7 @@ function generatePaddleTestData()
                             'custom_data' => null,
                             'description' => 'Make AeroEdit truly your own with custom domains. Custom domains reinforce your brand identity and make it easy for your team to access your account.',
                             'import_meta' => null,
-                            'tax_category' => 'standard'
+                            'tax_category' => 'standard',
                         ],
                         'price_id' => 'pri_01gsz98e27ak2tyhexptwc58yk',
                         'quantity' => 1,
@@ -286,9 +286,9 @@ function generatePaddleTestData()
                             'tax' => '1766',
                             'total' => '21666',
                             'discount' => '0',
-                            'subtotal' => '19900'
-                        ]
-                    ]
+                            'subtotal' => '19900',
+                        ],
+                    ],
                 ],
                 'payout_totals' => null,
                 'tax_rates_used' => [
@@ -297,10 +297,10 @@ function generatePaddleTestData()
                             'tax' => '5315',
                             'total' => '65215',
                             'discount' => '0',
-                            'subtotal' => '59900'
+                            'subtotal' => '59900',
                         ],
-                        'tax_rate' => '0.08875'
-                    ]
+                        'tax_rate' => '0.08875',
+                    ],
                 ],
                 'adjusted_totals' => [
                     'fee' => '0',
@@ -309,12 +309,12 @@ function generatePaddleTestData()
                     'earnings' => '0',
                     'subtotal' => '59900',
                     'grand_total' => '65215',
-                    'currency_code' => 'USD'
+                    'currency_code' => 'USD',
                 ],
-                'adjusted_payout_totals' => null
+                'adjusted_payout_totals' => null,
             ],
             'checkout' => [
-                'url' => 'https://aeroedit.com/pay?_ptxn=txn_01hv8wptq8987qeep44cyrewp9'
+                'url' => 'https://aeroedit.com/pay?_ptxn=txn_01hv8wptq8987qeep44cyrewp9',
             ],
             'payments' => [],
             'billed_at' => null,
@@ -332,17 +332,17 @@ function generatePaddleTestData()
             'invoice_number' => null,
             'billing_details' => null,
             'collection_mode' => 'automatic',
-            'subscription_id' => null
-        ]
+            'subscription_id' => null,
+        ],
     ];
 
-    $dateString = "2025-08-31T18:01:23.601258Z";
+    $dateString = '2025-08-31T18:01:23.601258Z';
     $date = new \DateTime($dateString, new DateTimeZone('UTC'));
     $timestamp = $date->getTimestamp();
 
     $encodedBody = json_encode($paddleRequestData);
 
-    $signedPayload = $timestamp . ':' . $encodedBody;
+    $signedPayload = $timestamp.':'.$encodedBody;
     $hash = hash_hmac('sha256', $signedPayload, config('services.paddle.notification_secret_key'));
 
     $signature = "ts={$timestamp};h1={$hash}";

@@ -39,6 +39,6 @@ return [
         'client_side_token' => env('PADDLE_CLIENT_SIDE_TOKEN'),
         'notification_secret_key' => env('PADDLE_NOTIFICATION_SECRET_KEY'),
         'api_key' => env('PADDLE_CLIENT_API_KEY'),
-    ]
+    ],
 
 ];

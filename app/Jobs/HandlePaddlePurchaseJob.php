@@ -13,7 +13,5 @@ class HandlePaddlePurchaseJob extends SpatieProcessWebhookJob implements ShouldQ
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public function handle(): void
-    {
-    }
+    public function handle(): void {}
 }
